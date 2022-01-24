@@ -1,5 +1,3 @@
-package yosif;
-
 import java.util.Arrays;
 
 public class Matrix{
