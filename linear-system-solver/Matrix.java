@@ -1,4 +1,4 @@
-package com.company;
+package yosif;
 
 import java.util.Arrays;
 
@@ -60,28 +60,27 @@ public class Matrix{
     /*
         3 6 8 = 1 ---->*5
         5 7 1 = 2 ---->*3
-
         15 30 40 = 5
         15 21 3 = 6 ---->R2=R2-R1
-
         15 30 40 = 5 ---->Revert the changes after calculation
         0 -9 -37 = -1
-
         3 6 8 = 1
         0 -9 -37 =-1
      */
     public void solveMatrix(){
-        if(this.elements[0][0]==0){
-            for(int row=1;row<this.rows;++row){
-                if(this.elements[row][0]!=0){
-                    this.swapRows(0,row);
-                    break;
-                }
-            }
-        }
-
         for(int column=0;column<this.columns-1;column++){
             for(int row=0;row<this.rows;row++){
+                if (row==0){ // This "if" checks whether there is a zero at the diagonal of the matrix and if there is it swaps the rows accordingly so there is no 0 in the way of the diagonal. If this can't be done the system has no solution.
+                    if(this.elements[column][column] == 0){
+                        for(int i=row+1;i<this.rows;i++){
+                            if(this.elements[i][column]!=0){
+                                System.out.println(column + " " + i);
+                                this.swapRows(column,i);
+                                break;
+                            }
+                        }
+                    }
+                }
                 if(row==column){
                     continue;
                 }
@@ -94,6 +93,10 @@ public class Matrix{
                 this.subtractRows(row,getMultipliedRow(column,currentCoefficient));//subtracting the common multiplies to get a 0 in the row (without changing the row that will contain 1 in the end)
 
                 this.divideRow(row,this.elements[column][column]);//Unscaling the row after the 0 is set
+                print();
+                System.out.println();
+                System.out.println();
+                System.out.println();
             }
         }
 
@@ -132,7 +135,7 @@ public class Matrix{
             System.out.println("]");
         }
     }
-    
+
     public void printAsExpression(){
         for(int row=0;row<this.rows;row++){
             for(int column=0;column<this.columns;column++){
