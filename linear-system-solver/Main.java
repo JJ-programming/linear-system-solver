@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.Scanner;
 
 //FIXME Fix the bug where if a 0 is calculated on the diagonal of the matrix the results become NaN
